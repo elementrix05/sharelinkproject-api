@@ -4,23 +4,15 @@ const File = require('../models/file');
 router.get('/:uuid', async (req, res) => {
     try {
         const file = await File.findOne({ uuid: req.params.uuid });
+        // Link expired
         if(!file) {
-            return res.render('download', { error: 'Link has been Expired !'});
-
-        }
-
-        return res.render('download', {
-            uuid: file.uuid,
-            filename: file.filename,
-            fileSize: file.size,
-            downolad: `${process.env.APP_BASE_URL}/files/download/${file.uuid}`
-        });
+            return res.render('download', { error: 'Link has been expired.'});
+        } 
+        return res.render('download', { uuid: file.uuid, fileName: file.filename, fileSize: file.size, downloadlink: `${process.env.APP_BASE_URL}/files/download/${file.uuid}` });
     } catch(err) {
-        return res.render('download', { error: 'something went wrong :/'});
+        return res.render('download', { error: 'Something went wrong.'});
     }
-    
-
 });
 
 
-module.exports = router ;
+module.exports = router;
