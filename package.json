@@ -5,7 +5,7 @@
   "main": "indexx.js",
   "scripts": {
     "dev": "nodemon indexx.js",
-    "serve": "node indexx.js"
+    "start": "node indexx.js"
   },
   "author": "niraj wadile",
   "license": "ISC",
